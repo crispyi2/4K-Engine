@@ -1,0 +1,20 @@
+<maps>
+	<map>
+		<mapInfo>
+			<basic name="example marathon" difficulty="simple"/>
+			<chartPaths>
+				<chartPath chartName="example marathon chart 1" path="Charts/exampleMarathonChart1"/>
+			</chartPaths>
+			<more>
+				<difficulty>
+					<chartDifficulties>
+						<chartDifficulty name="example marathon chart 1" difficulty="simple"/>
+					</chartDifficulties>
+				</difficulty>
+			</more>
+		</mapInfo>
+		<charts>
+			
+		</charts>
+	</map>
+</maps>

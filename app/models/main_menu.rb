@@ -1,2 +1,0 @@
-class MainMenu < ApplicationRecord
-end

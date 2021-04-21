@@ -1,0 +1,77 @@
+<chart>
+    <info>
+        <identity>
+            <basic name="example marathon chart 1" difficulty="simple" />
+            <more>
+                <difficulty>
+                    <notes scrollspeed="1.0" bpm="100" />
+                </difficulty>
+                <description>
+                    <line linenum="1">this is the first line</line>
+                    <line linenum="2">this is the second line</line>
+                    <line linenum="3">and this is the last line</line>
+                </description>
+            </more>
+        </identity>
+        <assets>
+            <scripts>
+                <ruby>
+                    <!--<script name=""/>-->
+                </ruby>
+                <javascript>
+                    <!--<script name=""/>-->
+                </javascript>
+                <css>
+                    <!--<script name=""/>-->
+                </css>
+            </scripts>
+            <visuals>
+                <notes>
+                    <arrows>
+						<arrow>
+							<up/>
+							<down/>
+							<left/>
+							<right/>
+						</arrow>
+					</arrows>
+                </notes>
+				<decoration>
+					<backgrounds>
+						<background/>
+					</backgrounds>
+					<foregrounds>
+						<foreground/>
+					</foregrounds>
+						<effects>
+							<effect/>
+						</effects>
+				</decoration>
+				<playArea>
+					<back/>
+					<frame/>
+					<target/>
+				</playArea>
+            </visuals>
+			<audio>
+				<song/>
+				<sfx>
+					<sound/>
+				</sfx>
+			</audio>
+        </assets>
+    </info>
+    <charting>
+        <row rownum="1" larr="0" darr="0" uarr="0" rarr="0">
+            <rowdat larr_img="null" darr_img="null" uarr_img="null" rarr_img="null" />
+        </row>
+    </charting>
+</chart>
+<help>
+    <!--
+here is a quick rundown of how averything in this file works
+-->
+	<infoHelp>
+		<!---->
+	</infoHelp>
+</help>

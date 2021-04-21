@@ -29,15 +29,16 @@ class TitleScreenState extends FlxState
 		super.create();
 		
 		playButton = new FlxUIButton(0, 0, "4K", clickPlay, true, false, 0xFF691069);
-		playButton.screenCenter();
 		playButton.resize(100, 100);
 		playButton.setLabelFormat(null, 20, FlxColor.WHITE, null, null, FlxColor.TRANSPARENT, true);
-		add(playButton);
+		playButton.screenCenter();
 		
 		settingsButton = new FlxUIButton(0, 0, "Settings", clickSettings, true, false, 0xFF691069);
 		settingsButton.resize(FlxG.width, 30);
-		playButton.setLabelFormat(null, 20, FlxColor.WHITE, null, null, FlxColor.TRANSPARENT, true);
+		settingsButton.setLabelFormat(null, 10, FlxColor.WHITE, null, null, FlxColor.TRANSPARENT, true);
+		
 		add(settingsButton);
+		add(playButton);
 	}
 
 	override public function update(elapsed:Float)
@@ -47,7 +48,7 @@ class TitleScreenState extends FlxState
 	
 	function clickPlay()
 	{
-	
+		FlxG.switchState(new MainMenuState());
 	}
 	
 	function clickSettings()

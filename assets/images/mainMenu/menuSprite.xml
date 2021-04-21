@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.6 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="menuSprite.png" width="1461" height="659">
+  <SubTexture name="horizontalLongButton" x="0" y="0"  width="684" height="242" frameX="-0" frameY="-0" frameWidth="684" frameHeight="242"/>
+  <SubTexture name="verticalLongButton" x="684" y="0" width="466" height="265" rotated="true"  frameX="-0" frameY="-0" frameWidth="265" frameHeight="466"/>
+  <SubTexture name="wheelThing" x="0" y="242"  width="424" height="417" frameX="-0" frameY="-0" frameWidth="424" frameHeight="417"/>
+  <SubTexture name="settings" x="424" y="242"  width="250" height="200" frameX="-0" frameY="-0" frameWidth="250" frameHeight="200"/>
+  <SubTexture name="regularAssButton" x="1150" y="0"  width="311" height="310" frameX="-0" frameY="-0" frameWidth="311" frameHeight="310"/>
+  <SubTexture name="questionMark" x="674" y="265" width="142" height="118" rotated="true"  frameX="-0" frameY="-0" frameWidth="118" frameHeight="142"/>
+</TextureAtlas>

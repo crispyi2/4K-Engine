@@ -61,17 +61,5 @@
 			</audio>
         </assets>
     </info>
-    <charting>
-        <row rownum="1" larr="0" darr="0" uarr="0" rarr="0">
-            <rowdat larr_img="null" darr_img="null" uarr_img="null" rarr_img="null" />
-        </row>
-    </charting>
+	<charting chartData="exampleMarathonChart1.csv"/>
 </chart>
-<help>
-    <!--
-here is a quick rundown of how averything in this file works
--->
-	<infoHelp>
-		<!---->
-	</infoHelp>
-</help>

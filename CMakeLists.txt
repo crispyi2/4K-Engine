@@ -20,6 +20,6 @@ target_link_libraries(4K_Engine glfw ${OPENGL_LIBRARIES})
 if (DEFINED EMSCRIPTEN)
 set_target_properties(4K_Engine
         PROPERTIES SUFFIX ".html"
-        LINK_FLAGS " --preload-file assets --emrun --shell-file ./src/html/shell.html -o build/game.html -s USE_GLFW=3")
+        LINK_FLAGS " --preload-file assets --emrun --shell-file src/html/shell.html -o build/game.html -s USE_GLFW=3")
         set(EXECUTABLE_OUTPUT_PATH build)
 endif (DEFINED EMSCRIPTEN)

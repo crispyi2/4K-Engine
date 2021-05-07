@@ -99,7 +99,5 @@ int main() {
 
   FILE * logo = fopen("assets/images/logo.png", "r");
 
-
-
   return 0;
 }

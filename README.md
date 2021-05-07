@@ -8,11 +8,7 @@ Install [EmSDK](https://github.com/emscripten-core/emsdk)
 
 - build
 ```
-./emcmake cmake
-```
-
-```
-make
+./compile.sh
 ```
 
 - run

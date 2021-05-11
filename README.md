@@ -1,38 +1,40 @@
-# Welcome
+# Minecraft-Purpur
+An unofficial Mincraft engine powered by ImGui, Webassembly, Emscripten, and c++
 
-## Building And Running
+## Building 
 
-- setup
+1. Add emsdk to your shell path;
 
-Install [EmSDK](https://github.com/emscripten-core/emsdk)
+You need to **source** the script ~/emsdk/emsdk_env.sh
 
-- build
-```
-./compile.sh
-```
+````bash
+source ~/emsdk/emsdk_env.sh
+````
 
-- run
-```
-./run.sh
-```
+2. Run cmake, using "emcmake":
 
-Then go to http://localhost:3000 in your web browser
+`````bash
+mkdir build_emscripten
+cd build_emscripten
+emcmake cmake .. -DHELLOIMGUI_USE_SDL_OPENGL3=ON ..
+`````
 
-## Custom Content
+Note: the script [tools/emscripten/cmake_emscripten.sh](tools/emscripten/cmake_emscripten.sh) does the cmake part of this.
 
+3. Build
 
-### Custom Charts
+````bash
+make -j 4
+````
 
----
+4. Run
 
-#### Chart Editor
+`````bash
+npm i -g http-server
+node ./run.js
+`````
 
----
+## Credits
 
-### Custom Debug Commands
-
----
-
-### Scripting
-
----
+- tools
+  - Hello ImGui: https://github.com/pthom/hello_imgui | Used as a base for the ui

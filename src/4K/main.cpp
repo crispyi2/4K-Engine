@@ -5,6 +5,7 @@
 #include "hello_imgui/hello_imgui.h"
 #include "../external/imgui/backends/imgui_impl_opengl3.h"
 #include "../external/imgui/backends/imgui_impl_glfw.h"
+#include "imgui_internal.h"
 #include <GLFW/glfw3.h>
 
 
@@ -54,6 +55,10 @@ int main(int , char *[]) {
     bool show_demo_window = true;
     bool show_another_window = false;
 
+    params.callbacks.SetupImGuiConfig = [&]() {
+
+    };
+
     params.callbacks.SetupImGuiStyle = [&]() {
 
         auto& io = ImGui::GetIO();
@@ -71,9 +76,12 @@ int main(int , char *[]) {
         style.PopupBorderSize = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.277f, 0.160f, 0.480f, 0.540f);
+
+        io.MouseDrawCursor = true;
     };
 
     params.callbacks.ShowGui = [&]() {
+
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -116,6 +124,53 @@ int main(int , char *[]) {
             ImGui::End();
         }
 
+        if(ImGui::BeginMainMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+                if(ImGui::MenuItem("New"))
+                {
+                    //Do something
+                }
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Edit"))
+            {
+                if(ImGui::MenuItem("New"))
+                {
+                    //Do something
+                }
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("About"))
+            {
+                if(ImGui::MenuItem("About 4K Engine"))
+                {
+                    //Do something
+                }
+
+                if(ImGui::MenuItem("About ImGui"))
+                {
+                    //Do something
+                }
+                if(ImGui::MenuItem("About Hello, ImGui"))
+                {
+                    //Do something
+                }
+
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Help"))
+            {
+                if(ImGui::MenuItem("New"))
+                {
+                    //Do something
+                }
+                ImGui::EndMenu();
+            }
+
+            ImGui::EndMainMenuBar();
+        }
 
         ImGui::Begin("4K Engine");
             

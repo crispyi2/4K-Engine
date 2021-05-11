@@ -1,3 +1,4 @@
+#define IMGUI_USER_CONFIG "imconfig.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "lib/stb/stb_image.h"
 
@@ -78,9 +79,23 @@ int main(int , char *[]) {
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.277f, 0.160f, 0.480f, 0.540f);
 
         io.MouseDrawCursor = true;
+
+        io.Fonts->Build();
     };
 
     params.callbacks.ShowGui = [&]() {
+
+        ImGui::Begin("4K Engine");
+        {
+            // Using a Child allow to fill all the space of the window.
+            // It also alows customization
+            ImGui::BeginChild("GameRender");
+            // Get the size of the child (i.e. the whole draw size of the windows).
+            ImVec2 wsize = ImGui::GetWindowSize();
+            // Because I use the texture from OpenGL, I need to invert the V from the UV.
+            ImGui::EndChild();
+        }
+        ImGui::End();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
@@ -162,9 +177,20 @@ int main(int , char *[]) {
             }
             if (ImGui::BeginMenu("Help"))
             {
-                if(ImGui::MenuItem("New"))
+                if(ImGui::BeginMenu("\uF02D " "Docs"))
                 {
-                    //Do something
+                    if(ImGui::MenuItem("Readme - Finished: " "\u2717"))
+                    {
+
+                    }
+                    if(ImGui::MenuItem("Wiki Page - Finished: " "\u2717"))
+                    {
+
+                    }
+                    if(ImGui::MenuItem("ReadTheDocs Page - Finished " "\u2717"))
+                    {
+
+                    }
                 }
                 ImGui::EndMenu();
             }

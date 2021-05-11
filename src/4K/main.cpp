@@ -1,15 +1,16 @@
 #define IMGUI_USER_CONFIG "imconfig.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "lib/stb/stb_image.h"
 
-#include "../hello_imgui/image_gl.h"
+#include "image_gl.h"
 #include "hello_imgui/hello_imgui.h"
 #include "../external/imgui/backends/imgui_impl_opengl3.h"
 #include "../external/imgui/backends/imgui_impl_glfw.h"
 #include "imgui_internal.h"
 #include <GLFW/glfw3.h>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "hello_imgui/internal/stb_image.h"
 
+// Simple helper function to load an image into a OpenGL texture with common settings
 bool LoadTextureFromFile(const char* filename, GLuint* out_texture, int* out_width, int* out_height)
 {
     // Load from file
@@ -48,9 +49,7 @@ int main(int , char *[]) {
     HelloImGui::RunnerParams params;
     params.appWindowParams.windowSize = {1280.f, 720.f};
     params.appWindowParams.windowTitle = "4K";
-    params.imGuiWindowParams.defaultImGuiWindowType = HelloImGui::DefaultImGuiWindowType::NoDefaultWindow;
-
-    
+    params.imGuiWindowParams.defaultImGuiWindowType = HelloImGui::DefaultImGuiWindowType::NoDefaultWindow; 
 
     // Our state
     bool show_demo_window = true;
@@ -78,21 +77,41 @@ int main(int , char *[]) {
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.277f, 0.160f, 0.480f, 0.540f);
 
-        io.MouseDrawCursor = true;
+        // Load a first font
+        ImFont* font = io.Fonts->AddFontDefault();
 
+        // Add character ranges and merge into the previous font
+        // The ranges array is not copied by the AddFont* functions and is used lazily
+        // so ensure it is available at the time of building or calling GetTexDataAsRGBA32().
+        static const ImWchar icons_ranges[] = { 0xf000, 0xf3ff, 0 }; // Will not be copied by AddFont* so keep in scope.
+        ImFontConfig config;
+        config.MergeMode = true;
+        io.Fonts->AddFontFromFileTTF("DroidSans.ttf", 18.0f, &config, io.Fonts->GetGlyphRangesJapanese()); // Merge into first font
+        io.Fonts->AddFontFromFileTTF("fontawesome-webfont.ttf", 18.0f, &config, icons_ranges);             // Merge into first font
         io.Fonts->Build();
     };
 
     params.callbacks.ShowGui = [&]() {
 
-        ImGui::Begin("4K Engine");
+        auto& io = ImGui::GetIO();
+
+        int logo_texture_width = 0;
+        int logo_texture_height = 0;
+        GLuint logo_texture = 0;
+        bool LogoTex = LoadTextureFromFile("images/scenes/title_screen/logo.png", &logo_texture, &logo_texture_width, &logo_texture_height);
+        IM_ASSERT(LogoTex);
+
+        ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f,0.5f));
+        ImGui::SetNextWindowSize(ImVec2(960, 640), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowFocus();
+        ImGui::Begin("4K Engine", NULL);
         {
             // Using a Child allow to fill all the space of the window.
             // It also alows customization
             ImGui::BeginChild("GameRender");
             // Get the size of the child (i.e. the whole draw size of the windows).
             ImVec2 wsize = ImGui::GetWindowSize();
-            // Because I use the texture from OpenGL, I need to invert the V from the UV.
+            ImGui::Image((void*)(intptr_t)logo_texture, ImVec2(logo_texture_width / 2, logo_texture_height / 2));
             ImGui::EndChild();
         }
         ImGui::End();
@@ -179,15 +198,15 @@ int main(int , char *[]) {
             {
                 if(ImGui::BeginMenu("\uF02D " "Docs"))
                 {
-                    if(ImGui::MenuItem("Readme - Finished: " "\u2717"))
+                    if(ImGui::MenuItem(u8"Readme - Finished: \u2717"))
                     {
 
                     }
-                    if(ImGui::MenuItem("Wiki Page - Finished: " "\u2717"))
+                    if(ImGui::MenuItem(u8"Wiki Page - Finished: \u2717"))
                     {
 
                     }
-                    if(ImGui::MenuItem("ReadTheDocs Page - Finished " "\u2717"))
+                    if(ImGui::MenuItem(u8"ReadTheDocs Page - Finished \u2717"))
                     {
 
                     }
@@ -197,10 +216,6 @@ int main(int , char *[]) {
 
             ImGui::EndMainMenuBar();
         }
-
-        ImGui::Begin("4K Engine");
-            
-        ImGui::End();
             
         ImGui::Render();
     };

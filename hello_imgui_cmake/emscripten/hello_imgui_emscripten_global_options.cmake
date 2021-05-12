@@ -5,7 +5,7 @@
 set(BUILD_SHARED_LIBS OFF)
 
 # Standard flags for emscripten
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-s USE_SDL=2 -s USE_WEBGL2=1 -s WASM=1 -s FULL_ES3=1 -s ALLOW_MEMORY_GROWTH=1")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-lidbfs.js -s USE_SDL=2 -s USE_WEBGL2=1 -s WASM=1 -s FULL_ES3=1 -s ALLOW_MEMORY_GROWTH=1")
 
 # Debug build is  -O0 -g4 in order to have the call stack + source map
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")

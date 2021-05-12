@@ -230,20 +230,46 @@ void Markdown( const std::string& markdown_ )
 void MarkdownExample()
 {
     const std::string markdownText = u8R"(
-# H1 Header: Text and Links
-You can add [links like this one to enkisoftware](https://www.enkisoftware.com/) and lines will wrap well.
-You can also insert images ![image alt text](image identifier e.g. filename)
-Horizontal rules:
-***
-___
-*Emphasis* and **strong emphasis** change the appearance of the text.
-## H2 Header: indented text.
-  This text has an indent (two leading spaces).
-    This one has two.
-### H3 Header: Lists
-  * Unordered lists
-    * Lists can be indented with two extra spaces.
-  * Lists can have [links like this one to Avoyd](https://www.avoyd.com/) and *emphasized text*
+# Minecraft-Purpur
+An unofficial Mincraft engine powered by ImGui, Webassembly, Emscripten, and c++
+
+## Building 
+
+1. Add emsdk to your shell path;
+
+You need to **source** the script ~/emsdk/emsdk_env.sh
+
+````bash
+source ~/emsdk/emsdk_env.sh
+````
+
+2. Run cmake, using "emcmake":
+
+`````bash
+mkdir build_emscripten
+cd build_emscripten
+emcmake cmake .. -DHELLOIMGUI_USE_SDL_OPENGL3=ON ..
+`````
+
+Note: the script [tools/emscripten/cmake_emscripten.sh](tools/emscripten/cmake_emscripten.sh) does the cmake part of this.
+
+3. Build
+
+````bash
+make -j 4
+````
+
+4. Run
+
+`````bash
+npm i -g http-server
+node ./run.js
+`````
+
+## Credits
+
+- tools
+  - Hello ImGui: https://github.com/pthom/hello_imgui | Used as a base for the ui
 )";
     Markdown( markdownText );
 }
@@ -367,24 +393,50 @@ int main(int , char *[]) {
             ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f,0.5f));
             ImGui::SetNextWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
             ImGui::Begin("Help: Readme");
-                        const std::string markdownText = u8R"(
-# H1 Header: Text and Links
-You can add [links like this one to enkisoftware](https://www.enkisoftware.com/) and lines will wrap well.
-You can also insert images ![image alt text](image identifier e.g. filename)
-Horizontal rules:
-***
-___
-*Emphasis* and **strong emphasis** change the appearance of the text.
-## H2 Header: indented text.
-This text has an indent (two leading spaces).
-This one has two.
-### H3 Header: Lists
-* Unordered lists
-* Lists can be indented with two extra spaces.
-* Lists can have [links like this one to Avoyd](https://www.avoyd.com/) and *emphasized text*
+                        const std::string four_k_readme_file = u8R"(
+# Minecraft-Purpur
+An unofficial Mincraft engine powered by ImGui, Webassembly, Emscripten, and c++
+
+## Building 
+
+1. Add emsdk to your shell path;
+
+You need to **source** the script ~/emsdk/emsdk_env.sh
+
+```
+source ~/emsdk/emsdk_env.sh
+```
+
+2. Run cmake, using "emcmake":
+
+```
+mkdir build_emscripten
+cd build_emscripten
+emcmake cmake .. -DHELLOIMGUI_USE_SDL_OPENGL3=ON ..
+```
+
+Note: the script [tools/emscripten/cmake_emscripten.sh](tools/emscripten/cmake_emscripten.sh) does the cmake part of this.
+
+3. Build
+
+```
+make -j 4
+```
+
+4. Run
+
+```
+npm i -g http-server
+node ./run.js
+```
+
+## Credits
+
+- tools
+  - Hello ImGui: https://github.com/pthom/hello_imgui | Used as a base for the ui
                         )";
 
-                Markdown( markdownText );
+                Markdown( four_k_readme_file );
                 ImGui::End();
         }
 

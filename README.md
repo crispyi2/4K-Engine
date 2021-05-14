@@ -1,40 +1,25 @@
-# Minecraft-Purpur
-An unofficial Mincraft engine powered by ImGui, Webassembly, Emscripten, and c++
 
-## Building 
+# How to Build
 
-1. Add emsdk to your shell path;
+- On Windows with Visual Studio's CLI
 
-You need to **source** the script ~/emsdk/emsdk_env.sh
+```
+set SDL2_DIR=path_to_your_sdl2_folder
+cl /Zi /MD /I.. /I..\.. /I%SDL2_DIR%\include /I..\libs\gl3w main.cpp ..\..\backends\imgui_impl_sdl.cpp ..\..\backends\imgui_impl_opengl3.cpp ..\..\imgui*.cpp ..\libs\gl3w\GL\gl3w.c /FeDebug/example_sdl_opengl3.exe /FoDebug/ /link /libpath:%SDL2_DIR%\lib\x86 SDL2.lib SDL2main.lib opengl32.lib /subsystem:console
+#          ^^ include paths                                 ^^ source files                                                                                  ^^ output exe                    ^^ output dir   ^^ libraries
+# or for 64-bit:
+cl /Zi /MD /I.. /I..\.. /I%SDL2_DIR%\include /I..\libs\gl3w main.cpp ..\..\backends\imgui_impl_sdl.cpp ..\..\backends\imgui_impl_opengl3.cpp ..\..\imgui*.cpp ..\libs\gl3w\GL\gl3w.c /FeDebug/example_sdl_opengl3.exe /FoDebug/ /link /libpath:%SDL2_DIR%\lib\x64 SDL2.lib SDL2main.lib opengl32.lib /subsystem:console
+```
 
-````bash
-source ~/emsdk/emsdk_env.sh
-````
+- On Linux and similar Unixes
 
-2. Run cmake, using "emcmake":
+```
+c++ `sdl2-config --cflags` -I .. -I ../.. -I ../../backends -I ../libs/gl3w main.cpp ../../backends/imgui_impl_sdl.cpp ../../backends/imgui_impl_opengl3.cpp ../../imgui*.cpp ../libs/gl3w/GL/gl3w.c `sdl2-config --libs` -lGL -ldl
+```
 
-`````bash
-mkdir build_emscripten
-cd build_emscripten
-emcmake cmake .. -DHELLOIMGUI_USE_SDL_OPENGL3=ON ..
-`````
+- On Mac OS X
 
-Note: the script [tools/emscripten/cmake_emscripten.sh](tools/emscripten/cmake_emscripten.sh) does the cmake part of this.
-
-3. Build
-
-````bash
-make -j 4
-````
-
-4. Run
-
-`````bash
-npm i -g http-server
-node ./run.js
-`````
-
-## Credits
-
-- tools
-  - Hello ImGui: https://github.com/pthom/hello_imgui | Used as a base for the ui
+```
+brew install sdl2
+c++ `sdl2-config --cflags` -I .. -I ../.. -I ../../backends -I ../libs/gl3w main.cpp ../../backends/imgui_impl_sdl.cpp ../../backends/imgui_impl_opengl3.cpp ../../imgui*.cpp ../libs/gl3w/GL/gl3w.c `sdl2-config --libs` -framework OpenGl -framework CoreFoundation
+```
